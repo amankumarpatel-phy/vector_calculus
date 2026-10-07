@@ -104,7 +104,7 @@ arrow_scale=st.sidebar.slider("Arrow scale",.15,1.0,.45,.05)
 show_contours=st.sidebar.checkbox("Contours",True)
 show_stream=st.sidebar.checkbox("Streamlines",True)
 
-x,y,X,Y=grid2d(extent,N); dx=x[1]-x[0];dy=y[1]-y[0]
+x,y,mesh=grid2d(extent,N); X,Y=mesh; dx=x[1]-x[0];dy=y[1]-y[0]
 
 # ============================================================
 # GRADIENT
