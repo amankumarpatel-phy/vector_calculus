@@ -1,68 +1,137 @@
-# ∇ Vector Calculus Visualizer
+# ∇ Vector Calculus Laboratory
 
-An interactive Streamlit application for visualizing the three central differential operators of vector calculus:
+An interactive **Streamlit + Plotly** computational laboratory for visualizing the geometry of the three fundamental differential operators:
 
-- **Gradient** — direction and magnitude of maximum increase of a scalar field.
-- **Divergence** — local net outflow/inflow of a vector field.
-- **Curl** — local rotational tendency of a vector field.
+**Gradient · Divergence · Curl**
 
-## Features
+This is intended as a teaching and computational companion for Mathematical Physics, Vector Calculus, Electromagnetism, Fluid Mechanics and introductory computational physics.
+
+## Laboratory modules
 
 ### Gradient
-Choose among:
-- Gaussian
+
+Start with a scalar field
+
+\[
+f(x,y)
+\]
+
+and investigate
+
+\[
+\nabla f =
+\frac{\partial f}{\partial x}\hat{i}
++
+\frac{\partial f}{\partial y}\hat{j}.
+\]
+
+The laboratory displays the scalar surface, gradient vectors, gradient magnitude and numerical derivative diagnostics.
+
+Available scalar fields:
+
 - Paraboloid
 - Saddle
+- Gaussian hill
 - Sinusoidal
-- Mixed scalar fields
-
-The app displays the scalar surface together with gradient vectors.
+- Mexican hat
 
 ### Divergence
-Choose vector fields such as:
+
+For a vector field
+
+\[
+\mathbf F=F_x\hat{i}+F_y\hat{j},
+\]
+
+the application calculates
+
+\[
+\nabla\cdot\mathbf F=
+\frac{\partial F_x}{\partial x}
++
+\frac{\partial F_y}{\partial y}.
+\]
+
+The visualization combines the vector field, streamlines, signed divergence map and a 3-D divergence landscape.
+
+### Curl
+
+For the two-dimensional fields used by the laboratory,
+
+\[
+(\nabla\times\mathbf F)_z=
+\frac{\partial F_y}{\partial x}
+-
+\frac{\partial F_x}{\partial y}.
+\]
+
+The interface displays the vector field together with the signed curl distribution and a 3-D curl landscape.
+
+Available vector fields:
+
+- Uniform
 - Radial source
 - Radial sink
 - Solid-body rotation
-- Irrotational saddle
-- Shear
-- Spiral
+- Saddle flow
+- Shear flow
+- Vortex
+- Spiral source
 
-The divergence is calculated numerically using finite differences.
+## Compare mode
 
-### Curl
-For the same 2-D vector fields, the z-component of curl is calculated as
+The **Compare** laboratory puts gradient, divergence and curl into a common conceptual framework.
+
+| Operator | Input | Output | Interpretation |
+|---|---|---|---|
+| Gradient \(\nabla f\) | Scalar field | Vector field | Steepest increase |
+| Divergence \(\nabla\cdot\mathbf F\) | Vector field | Scalar field | Source / sink behaviour |
+| Curl \(\nabla\times\mathbf F\) | Vector field | Vector field | Local rotational tendency |
+
+## Numerical computation
+
+The application uses a Cartesian numerical grid and evaluates spatial derivatives with NumPy finite differences.
+
+The grid spacing is explicitly supplied to the differentiation routine:
 
 \[
-(\\nabla \\times \\mathbf{F})_z =
-\\frac{\\partial F_y}{\\partial x} -
-\\frac{\\partial F_x}{\\partial y}.
+dx=x_{i+1}-x_i,\qquad dy=y_{j+1}-y_j.
 \]
 
-## Numerical method
+The user can vary:
 
-The application uses NumPy's central-difference gradient operator through:
+- domain size;
+- grid resolution;
+- vector density;
+- arrow scale;
+- contours;
+- streamlines.
 
-`numpy.gradient`
-
-with the actual grid spacing supplied in both coordinate directions.
-
-Plotly provides the interactive 2-D contour and 3-D surface/vector visualizations.
+This makes the application useful not only for visualization but also for discussing **discretization and numerical convergence**.
 
 ## Run locally
 
-```bash
+Install the dependencies:
+
+\`\`\`bash
 pip install -r requirements.txt
+\`\`\`
+
+Run:
+
+\`\`\`bash
 streamlit run app.py
-```
+\`\`\`
 
-## Suggested teaching use
+## Technology
 
-This project is designed as a visual companion for undergraduate and postgraduate Mathematical Physics / Vector Calculus. It allows students to connect the formal differential operators with their geometric meaning.
+- Python
+- Streamlit
+- NumPy
+- Plotly
 
-## Project
+## Author
 
-**Vector Calculus Visualizer**
-
-Author: **Aman Kumar Patel**
+**Aman Kumar Patel**
 
 Made with ❤️ by Aman Kumar Patel
